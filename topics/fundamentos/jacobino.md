@@ -22,3 +22,28 @@ J_f(x) = \begin{bmatrix}
 $$
 
 Donde $\nabla f_i(x)$ es el gradiente de la función escalar $f_i$ en el punto $x$.
+
+Dimensiones del Jacobiano:
+- Si $f: \mathbb{R}^n \to \mathbb{R}^m$, entonces $J_f(x) \in \mathbb{R}^{m \times n}$.
+
+## Ejemplo
+Si $f: \mathbb{R}^2 \to \mathbb{R}^3$.
+
+$$
+\mathbf{F}(x_1,x_2) = (f_1(x_1,x_2), f_2(x_1,x_2), f_3(x_1,x_2))
+$$
+
+$$
+J_f(x_1,x_2) =
+\begin{bmatrix}
+\frac{\partial f_1}{\partial x_1} & \frac{\partial f_1}{\partial x_2} \\
+\frac{\partial f_2}{\partial x_1} & \frac{\partial f_2}{\partial x_2} \\
+\frac{\partial f_3}{\partial x_1} & \frac{\partial f_3}{\partial x_2}
+\end{bmatrix}
+$$
+
+Notación alternativa:
+$$
+J_f(x_1,x_2) = \frac{\partial (f_1,f_2,f_3)}{\partial (x_1,x_2)} = \frac{\partial \mathbf{F}}{\partial \mathbf{x}}
+\quad\quad\quad J_f \in \mathbb{R}^{3 \times 2}
+$$
