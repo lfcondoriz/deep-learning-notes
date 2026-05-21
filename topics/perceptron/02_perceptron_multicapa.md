@@ -1,4 +1,4 @@
-# Perceptrón Multicapa (MLP)
+# 1. Perceptrón Multicapa (MLP)
 
 El perceptrón multicapa (MLP, *Multi-Layer Perceptron*) es una extensión del perceptrón simple que introduce una o más capas ocultas entre la capa de entrada y la capa de salida. Esto permite al modelo aprender representaciones más complejas y resolver problemas no lineales.
 
@@ -11,7 +11,7 @@ La composición de múltiples capas permite modelar relaciones complejas entre l
 
 ---
 
-# 1. Arquitectura General
+## 1.2. Arquitectura General
 
 Un MLP está compuesto por:
 
@@ -35,7 +35,7 @@ Cada capa $l$ contiene $n_l$ neuronas.
 
 ---
 
-## Convención Moderna de Dimensiones
+## 1.3. Convención Moderna de Dimensiones
 
 La convención estándar en Deep Learning es:
 
@@ -65,7 +65,7 @@ $$
 
 ---
 
-# 2. Notación por Capas
+## 1.4. Notación por Capas
 
 La convención estándar en Deep Learning utiliza un superíndice entre paréntesis $(l)$ para indicar la capa a la que pertenece una variable.
 
@@ -84,7 +84,7 @@ $$
 
 ---
 
-# 3. Propagación hacia Adelante (Forward Propagation)
+## 1.5. Propagación hacia Adelante (Forward Propagation)
 
 La propagación hacia adelante calcula las activaciones de cada capa de manera secuencial.
 
@@ -95,23 +95,26 @@ La propagación hacia adelante calcula las activaciones de cada capa de manera s
 
 2. Para cada capa:
     - Paso 1: Combinación Lineal
+
         $$
         \mathbf{z}^{(l)} = W^{(l)}\mathbf{a}^{(l-1)} + \mathbf{b}^{(l)}
         $$
 
     - Paso 2: Aplicación de la Función de Activación
+
         $$
         \mathbf{a}^{(l)} = \phi^{(l)}(\mathbf{z}^{(l)})
         $$
 
 3. La salida final de la red es:
+
     $$
     \mathbf{a}^{(L)}
     $$
 
 ---
 
-# 4. Interpretación Intuitiva
+## 1.6. Interpretación Intuitiva
 
 Cada neurona aprende una transformación de los datos de entrada.
 
@@ -125,7 +128,7 @@ Las capas ocultas permiten construir representaciones progresivamente más abstr
 
 ---
 
-# 5. Flujo General de Información
+## 1.7. Flujo General de Información
 
 La información fluye de manera secuencial desde la entrada hasta la salida:
 
@@ -154,14 +157,16 @@ donde:
 
 ---
 
-# 6. Forma Compacta del MLP
+## 1.8. Forma Compacta del MLP
 
 Un MLP puede interpretarse como la composición de funciones parametrizadas:
+
 $$
 \mathbf{a}^{(L)} = f_\theta(\mathbf{x})
 $$
 
 donde $f_\theta$ representa toda la red neuronal, es decir:
+
 $$
 f_\theta(\mathbf{x}) =
 \mathbf{a}^{(L)} =
@@ -191,16 +196,18 @@ Esta composición de transformaciones lineales y funciones no lineales es la bas
 Interpretación clave
 
 * Cada capa es una función:
+
     $$
     x \mapsto \phi(Wx + b)
     $$
 
 * La red completa es una **composición de funciones**:
+
     $$
     f_\theta = f^{(L)} \circ f^{(L-1)} \circ \cdots \circ f^{(1)}
     $$
 
-# 7. Forward Pass (Paso hacia adelante)
+## 1.9. Forward Pass (Paso hacia adelante)
 La información fluye de manera secuencial desde la entrada hasta la salida:
 
 $$
@@ -222,6 +229,7 @@ $$
 $$
 
 Combinación Lineal
+
 $$
 W^{(l)} \in \mathbb{R}^{n_l \times n_{l-1}}, \quad \mathbf{a}^{(l-1)} \in \mathbb{R}^{n_{l-1} \times 1}, \quad \mathbf{b}^{(l)} \in \mathbb{R}^{n_l \times 1}
 $$
@@ -258,11 +266,12 @@ b_{n_l}^{(l)}\end{bmatrix}
 $$
 
 Aplicación de la Función de Activación
+
 $$
 \mathbf{a}^{(l)} = \phi^{(l)}(\mathbf{z}^{(l)})
 $$
 
-# 8. Función de Pérdida y Optimización
+## 1.10. Función de Pérdida y Optimización
 Finalmente, comparamos la predicción de la red con el valor real:
 
 $$
@@ -305,7 +314,7 @@ $$
 
 ---
 
-## 8.1 Gradiente de los parámetros
+## 1.11. Gradiente de los parámetros
 
 El gradiente de la función de pérdida respecto a los parámetros del modelo es:
 
@@ -321,7 +330,7 @@ $$
 
 ---
 
-## 8.2 Actualización de parámetros
+## 1.12. Actualización de parámetros
 
 Una vez calculados los gradientes, se actualizan los parámetros mediante descenso de gradiente:
 
@@ -341,7 +350,7 @@ b^{(l)} &:= b^{(l)} - \eta \frac{\partial \mathcal{L}}{\partial b^{(l)}}
 $$
 
 ---
-# 9. Backpropagation
+## 1.13. Backpropagation
 Para calcular los gradientes de manera eficiente, se utiliza el algoritmo de backpropagation, que aplica la regla de la cadena de manera sistemática a través de las capas de la red.
 
 1. Empiezas con:
@@ -422,18 +431,21 @@ Para calcular los gradientes de manera eficiente, se utiliza el algoritmo de bac
     $$
 
     - Primer Término:
+
         $$
         \frac{\partial \mathcal{L}}{\partial \mathbf{z}^{(l+1)}}
         = \delta^{(l+1)}
         $$
 
     - Segundo Término:
+
         $$
         \frac{\partial \mathbf{z}^{(l+1)}}{\partial \mathbf{a}^{(l)}} = W^{(l+1)}
         $$
 
 
     Entonces:
+    
     $$
     \frac{\partial \mathcal{L}}{\partial \mathbf{a}^{(l)}}
     =
@@ -489,6 +501,7 @@ Para calcular los gradientes de manera eficiente, se utiliza el algoritmo de bac
 
 
 8. Finalmente, el $\delta^{(l)}$ se puede escribir como:
+
     $$
     \delta^{(l)} =
     \frac{\partial \mathcal{L}}{\partial \mathbf{z}^{(l)}}
@@ -540,6 +553,7 @@ Hay DOS Jacobianos distintos:
 
 ### 9.1.1. Jacobiano de la activación (local)
 Jacobiano de la no linealidad
+
 $$
 J_\phi = \frac{\partial \mathbf a^{(l)}}{\partial \mathbf z^{(l)}}
 $$
@@ -552,6 +566,7 @@ $$
 
 ### 9.1.2. Jacobiano de la capa $l$
 Este es el que aparece en backprop:
+
 $$
 \frac{\partial \mathbf{a}^{(l)}}{\partial \mathbf{a}^{(l-1)}}
 $$
@@ -604,6 +619,7 @@ $$
 
 ### 9.1.3. Jacobiano usado en backprop (real)
 El Jacobiano que realmente se usa en backprop es:
+
 $$
 (J^{(l)})^T = \left(\frac{\partial \mathbf{a}^{(l)}}{\partial \mathbf{a}^{(l-1)}}\right)^T =
 \left(\frac{\partial \mathbf{a}^{(l)}}{\partial \mathbf{z}^{(l)}} \frac{\partial \mathbf{z}^{(l)}}{\partial \mathbf{a}^{(l-1)}}\right)^T =
